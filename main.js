@@ -1,7 +1,7 @@
 const Discord = require('discord.js'); // using discord js api
 const bot = new Discord.Client();
 
-var PREFIX = '%';
+var PREFIX = 'boomer ';
 var VERSION = '1.0.1';
 
 // boot up bot
@@ -14,7 +14,7 @@ bot.on('ready', () => {
 
 // commands
 bot.on('message', message => {
-    let args = message.content.substring(PREFIX.length).split(' '); // split message's content into array of strings
+    let args = message.content.toLowerCase().substring(PREFIX.length).split(' '); // split message's content into array of strings
     switch(args[0]) {
         case 'ping':
             message.channel.send('Pong');
@@ -25,13 +25,6 @@ bot.on('message', message => {
         break;
         case 'qotd':
             message.channel.send('wip lol');
-        break;
-        case 'change-prefix':
-            if(!args[1]) return message.reply('Specify an argument to change the prefix to please.');
-            PREFIX = args[1];
-        break;
-        case 'reset-prefix':
-            PREFIX = '%';
         break;
         case 'help':
             message.channel.send("`I'm a boomer.\nTest, test, test\nI need to somehow put a list of helpful commands`");
