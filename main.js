@@ -32,29 +32,9 @@ bot.on('message', message => {
     const cmd = args.shift().toLowerCase();
 
     for(let[name] of cmds) {
-        cmds.get(name).execute(message, args);
+        if(cmd == name) cmds.get(name).execute(message, args);
+        else message.channel.send('Unknown command. Use `boomer help` to view the list of commands.');
     }
-
-    // switch(args[0]) {
-    //     case 'ping':
-    //         message.channel.send('Pong');
-    //     break;
-    //     case 'clr': case 'clear':
-    //         if(!args[1]) return message.reply('Invalid argument. For command help, type `boomer help`.');
-    //         message.channel.bulkDelete(args[1]);
-    //     break;
-    //     case 'qotd':
-    //         message.channel.send('wip lol');
-    //     break;
-    //     case 'help':
-    //         message.channel.send("```I'm a boomer.\nTest, test, test\nI need to somehow put a list of helpful commands```");
-    //     break;
-    //     case 'die':
-    //         message.channel.send("no u");
-    //     default:
-    //         // message.channel.send('not a command lol');
-    //     break;
-    // }
 });
 
 // finish bot bootup process

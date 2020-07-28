@@ -8,7 +8,7 @@ module.exports = {
         .setTitle("Help Commands")
         .addField("Version", VERSION)
         .addField("General", cmds.forEach(function(name, description) {
-            name + " " + description
+            return name + " " + description;
         }));
         message.channel.send(embed);
     }
