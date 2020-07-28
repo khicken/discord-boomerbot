@@ -3,7 +3,6 @@ const bot = new Discord.Client();
 
 var PREFIX = '%';
 var VERSION = '1.0.1';
-var fr = new FileReader();
 
 // boot up bot
 bot.on('ready', () => {
