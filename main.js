@@ -15,11 +15,11 @@ bot.on('ready', () => {
 
 // commands
 bot.on('message', message => {
-    let args = message.content.substring(PREFIX).split(' '); // split message's content into array of strings
+    let args = message.content.substring(PREFIX.length).split(' '); // split message's content into array of strings
     switch(args[0]) {
         case 'ping':
             message.channel.send('pong!');
-            break;
+        break;
     }
 });
 
