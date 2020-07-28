@@ -2,13 +2,16 @@ const Discord = require('discord.js'); // using discord js api
 const bot = new Discord.Client();
 
 const PREFIX = '%';
+var VERSION = '1.0.1';
 
-// init
+// boot up bot
 bot.on('ready', () => {
-    console.log(bot.user.username + " is now online!");
+    console.log(bot.user.username + ' is now online!');
+    bot.user.setActivity('the world crumble', {
+        type: 'WATCHING'
+    }).catch(console.error);
 });
-bot.login(process.env.token);
-bot.user.setStatus("Being a boomer");
+
 
 // commands
 bot.on('message', message => {
@@ -19,3 +22,6 @@ bot.on('message', message => {
             break;
     }
 });
+
+// finish bot bootup process
+bot.login(process.env.token);
