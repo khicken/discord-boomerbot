@@ -33,7 +33,7 @@ bot.on('message', message => {
 
     for(let[name] of cmds) {
         if(cmd == name) cmds.get(name).execute(message, args);
-        else message.channel.send('Unknown command. Use `boomer help` to view the list of commands.');
+        // else message.channel.send('Unknown command. Use `boomer help` to view the list of commands.');
     }
 });
 
