@@ -7,10 +7,10 @@ module.exports = {
     execute(message, args) {
         // making a rlly long string that contains all commands with name and desc. . .
         let cmdList = "";
-        for(let[name, description] of cmds) {
-            cmdList += name + ": " + description + "\n";
+        for(let name, description of cmds) {
+            cmdList = cmdList + name + ": " + description + "\n";
         }
-        
+
         const embed = new Discord.MessageEmbed()
         .setTitle("Help Commands")
         .addField("Version", VERSION)
