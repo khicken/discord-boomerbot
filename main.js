@@ -1,7 +1,7 @@
 const Discord = require('discord.js'); // using discord js api
 const bot = new Discord.Client();
 
-var PREFIX = 'boomer ';
+const PREFIX = 'boomer ';
 var VERSION = '1.0.1';
 
 // boot up bot
@@ -28,6 +28,9 @@ bot.on('message', message => {
         break;
         case 'help':
             message.channel.send("`I'm a boomer.\nTest, test, test\nI need to somehow put a list of helpful commands`");
+        break;
+        default:
+            message.channel.send('not a command lol');
         break;
     }
 });
