@@ -30,7 +30,7 @@ bot.on('message', message => {
             message.channel.send("`I'm a boomer.\nTest, test, test\nI need to somehow put a list of helpful commands`");
         break;
         default:
-            message.channel.send('not a command lol');
+            // message.channel.send('not a command lol');
         break;
     }
 });
