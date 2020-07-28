@@ -1,6 +1,6 @@
 const Discord = require('discord.js'); // using discord js api
 const fs = require('fs'); // using filesystem lib
-const bot = new Discord.Client();
+const client = new Discord.Client();
 
 const PREFIX = 'boomer ';
 var VERSION = '1.0.2';
@@ -8,7 +8,7 @@ var VERSION = '1.0.2';
 // using a filesystem to store individual commands
 var cmds = new Discord.Collection();
 module.exports = {
-    cmds, Discord, fs, bot, VERSION
+    cmds, Discord, fs, client, VERSION
 }
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js')); // filter files in commands directory
 for(const file of commandFiles) {
@@ -17,25 +17,28 @@ for(const file of commandFiles) {
 }
 
 // init boot
-bot.on('ready', () => {
-    console.log(bot.user.username + ' is now online!');
-    bot.user.setActivity('the world crumble', {
+client.on('ready', () => {
+    console.log(client.user.username + ' is now online!');
+    client.user.setActivity('the world crumble', {
         type: 'WATCHING'
     }).catch(console.error);
 });
 
 // commands
-bot.on('message', message => {
+client.on('message', message => {
     if(!message.content.includes(PREFIX)) return;
 
     const args = message.content.slice(PREFIX.length).split(/ +/); // split message's content into array of strings
-    const cmd = args.shift().toLowerCase();
+    const cmd = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
 
-    for(let[name] of cmds) {
-        if(cmd == name) cmds.get(name).execute(message, args);
-        // else message.channel.send('Unknown command. Use `boomer help` to view the list of commands.');
+    if (!cmds.has(cmd)) return; // if command not found, exit
+
+    try {
+        cmds.get(cmd).execute(message, args);
+    } catch (error) {
+        message.channel.send('There was an error trying to execute that command!');
     }
 });
 
-// finish bot bootup process
-bot.login(process.env.token);
+// finish client bootup process
+client.login(process.env.token);
