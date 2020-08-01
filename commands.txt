@@ -1,6 +1,0 @@
-ping:
-clr or clear:
-qotd:
-change-prefix:
-reset-prefix:
-help:
