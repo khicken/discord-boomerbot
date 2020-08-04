@@ -27,8 +27,8 @@ client.on('ready', () => {
 
 // commands
 client.on('message', message => {
-    if(!message.content.includes(PREFIX)) {console.log('test'); return;}
-
+    if(!message.content.includes(PREFIX)) { console.log('test'); return;}
+    console.log('some command was called. . .and didnt die');
     const args = message.content.slice(PREFIX.length).split(/ +/); // split message's content into array of strings
     const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
     const cmd = cmds.get(cmdName); // || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
@@ -40,7 +40,7 @@ client.on('message', message => {
         cooldowns.set(cmdName, new Discord.Collection());
     }
     
-    console.log('some command was called. . .');
+    console.log('some command was called. . .and didnttt die');
 
     // const now = Date.now();
     // const timestamps = cooldowns.get(cmdName);
