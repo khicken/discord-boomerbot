@@ -27,7 +27,7 @@ client.on('ready', () => {
 
 // commands
 client.on('message', message => {
-    if(!message.content.includes(PREFIX)) return;
+    if(!message.content.includes(PREFIX)) {return; console.log('test');}
 
     const args = message.content.slice(PREFIX.length).split(/ +/); // split message's content into array of strings
     const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
