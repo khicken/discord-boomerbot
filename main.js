@@ -30,7 +30,7 @@ client.on('message', message => {
     if(!message.content.includes(PREFIX)) return;
 
     const args = message.content.slice(PREFIX.length).split(/ +/); // split message's content into array of strings
-    const cmdName = args.toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
+    const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
     const cmd = cmds.get(cmdName) || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
     if(!cmds.has(cmd)) return; // if command not found, exit
