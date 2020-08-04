@@ -31,7 +31,7 @@ client.on('message', message => {
 
     const args = message.content.slice(PREFIX.length).split(/ +/); // split message's content into array of strings
     const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
-    const cmd = cmds.get(cmdName) || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
+    const cmd = cmds.get(cmdName); // || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
     if(!cmds.has(cmd)) return; // if command not found, exit
 
@@ -42,21 +42,21 @@ client.on('message', message => {
     
     console.log('some command was called. . .');
 
-    const now = Date.now();
-    const timestamps = cooldowns.get(cmdName);
-    const cooldownAmount = (command.cooldown || 3) * 1000;
+    // const now = Date.now();
+    // const timestamps = cooldowns.get(cmdName);
+    // const cooldownAmount = (command.cooldown || 3) * 1000;
     
-    if(timestamps.has(message.author.id)) {
-        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    // if(timestamps.has(message.author.id)) {
+    //     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     
-        if(now < expirationTime) {
-            const timeLeft = (expirationTime - now) / 1000;
-            // return message.reply(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmdName}\` command.`);
-        }
-    }
+    //     if(now < expirationTime) {
+    //         const timeLeft = (expirationTime - now) / 1000;
+    //         // return message.reply(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmdName}\` command.`);
+    //     }
+    // }
 
-    timestamps.set(message.author.id, now);
-    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+    // timestamps.set(message.author.id, now);
+    // setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     // execute command
     try {
