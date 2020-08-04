@@ -40,6 +40,8 @@ client.on('message', message => {
         cooldowns.set(cmdName, new Discord.Collection());
     }
     
+    console.log('some command was called. . .');
+
     const now = Date.now();
     const timestamps = cooldowns.get(cmdName);
     const cooldownAmount = (command.cooldown || 3) * 1000;
