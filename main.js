@@ -19,7 +19,7 @@ console.log(cmds);
 // init boot
 client.on('ready', () => {
     console.log(client.user.username + ' is now online!');
-    client.user.setActivity('the world crumble', {
+    client.user.setActivity('the US burn', {
         type: 'WATCHING'
     }).catch(console.error);
 });
