@@ -35,8 +35,7 @@ client.on('message', message => {
     const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
     const cmd = cmds.get(cmdName); // || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
-    if(!cmds.has(cmd)) return; // if command not found, exit
-
+    // if(!cmds.has(cmd)) return; // if command not found, exit
     
     if(!cooldowns.has(cmdName)) cooldowns.set(cmdName, new Discord.Collection()); // if cooldown not found, set the cooldown
     
