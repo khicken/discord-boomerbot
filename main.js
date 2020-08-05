@@ -10,7 +10,6 @@ function returnUsage(cmdname, usage) {
     return `Invalid arguments; usage: \`${PREFIX}${cmdname} ${usage}\``;
 }
 var cmds = new Discord.Collection(), cooldowns = new Discord.Collection();
-module.exports = { cmds, Discord, fs, client, VERSION, PREFIX, LAST_UPDATED, returnUsage } // export independent variables
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js')); // filter files in commands directory
 for(const file of commandFiles) { // using a filesystem to store individual commands
@@ -35,7 +34,10 @@ client.on('message', message => {
     const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
     const cmd = cmds.get(cmdName); // || cmds.find(cmd => cmd.aliases && cmd.aliases.includes(cmdName));
 
-    // if(!cmds.has(cmd)) return; // if command not found, exit
+    if(!cmds.has(cmd)) {
+        console.log("cmd list: " + cmds + "; command: " + cmd);
+        // return; // if command not found, exit
+    }
     
     if(!cooldowns.has(cmdName)) cooldowns.set(cmdName, new Discord.Collection()); // if cooldown not found, set the cooldown
     
@@ -43,7 +45,7 @@ client.on('message', message => {
 
     const now = Date.now();
     const timestamps = cooldowns.get(cmdName);
-    const cooldownAmount = (cmd.cooldown || 3) * 1000;
+    let cooldownAmount = (cmd.cooldown || 3) * 1000;
     
     if(timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -66,5 +68,5 @@ client.on('message', message => {
     }
 });
 
-// finish client bootup process
-client.login(process.env.token);
+client.login(process.env.token); // finish client bootup process
+module.exports = { cmds, Discord, fs, client, VERSION, PREFIX, LAST_UPDATED, returnUsage } // export independent variables

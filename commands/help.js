@@ -10,7 +10,7 @@ module.exports = {
     execute(message, args) {
         const embed = new Discord.MessageEmbed().setColor('#0099ff');
         
-        if(!args.length) {
+        if(!args[1]) {
             const miscCmds = "", userManagementCmds = "";
             for(const command of cmds) {
                 if(cmds.category == 'misc') {
@@ -33,7 +33,7 @@ module.exports = {
             return message.channel.send(embed);
         }
 
-        const cmdName = args.toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
+        const cmdName = args.shift().toLowerCase(); // set cmd as lowercase second argument of args arry (first arg is now removed)
         const cmd = cmds.get(cmdName) || cmds.find(c => c.aliases && c.aliases.includes(cmdName));
 
         if(!cmd) return message.channel.send("Invalid command!");
